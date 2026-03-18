@@ -1,0 +1,20 @@
+# Environments
+Lib/
+Scripts/
+Include/
+Lib - Copy/
+env/
+venv/
+.env
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Duplicate files
+requirements - Copy.txt
+
+# VS Code
+.vscode/
