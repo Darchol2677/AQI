@@ -1,1 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AQI Detector - Know Your Air</title>
+    <!-- Link to custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Load FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Application Header -->
+        <header class="header">
+            <div class="logo-animation">
+                <i class="fa-solid fa-wind text-primary fa-bounce" style="--fa-animation-duration: 3s;"></i>
+            </div>
+            <h1>Air Quality Detector</h1>
+            <p class="subtitle">Check real-time Air Quality Index, Pollutants, and Forecasts globally.</p>
+        </header>
 
+        <!-- Main Search Section -->
+        <section class="search-section card glass-effect fade-in">
+            <h2><i class="fa-solid fa-magnifying-glass-location text-primary"></i> Check AQI Now</h2>
+            <form action="/result" method="GET" id="searchForm">
+                <div class="search-box">
+                    <input type="text" name="city" id="cityInput" placeholder="Enter city name (e.g., Delhi, Mumbai, New York, London)" autocomplete="off">
+                    <button type="submit" id="submitBtn" class="btn primary-btn pulse-glow">Check Air Quality</button>
+                </div>
+            </form>
+            
+            <div class="divider"><span>OR</span></div>
+            
+            <button id="detectLocationBtn" class="btn secondary-btn location-btn">
+                <i class="fa-solid fa-location-crosshairs"></i> Auto-Detect My Location
+            </button>
+            <div class="loading-indicator" id="loadingIndicator" style="display: none;">
+                <i class="fa-solid fa-circle-notch fa-spin text-primary"></i> Fetching precise location...
+            </div>
+
+            <!-- Dynamic Recent Searches -->
+            <div class="recent-searches mt-4" id="recentSearchesContainer" style="display: none;">
+                <h3><i class="fa-solid fa-clock-rotate-left"></i> Recent Searches</h3>
+                <div id="recentSearchesList" class="tags"></div>
+            </div>
+        </section>
+
+        <!-- Educational Section -->
+        <section class="info-section grid-2 fade-in" style="animation-delay: 0.2s;">
+            <div class="card hover-lift">
+                <h2><i class="fa-solid fa-circle-info text-primary"></i> What is AQI?</h2>
+                <p>The <strong>Air Quality Index (AQI)</strong> is the metric used for reporting daily air quality. It communicates how clean or polluted your air is, and what associated health effects might be a concern for you.</p>
+                <div class="info-highlight">
+                    <i class="fa-solid fa-lungs text-primary"></i>
+                    <p>The AQI focuses on health effects you may experience within a few hours or days after breathing polluted air.</p>
+                </div>
+            </div>
+            
+            <div class="card hover-lift">
+                <h2><i class="fa-solid fa-palette text-primary"></i> AQI Levels & Colors</h2>
+                <ul class="aqi-legend">
+                    <li><span class="color-box good"></span> <strong>0-50 (Good):</strong> Little or no risk.</li>
+                    <li><span class="color-box moderate"></span> <strong>51-100 (Moderate):</strong> Acceptable quality.</li>
+                    <li><span class="color-box sensitive"></span> <strong>101-150 (Unhealthy for Sensitive):</strong> Risk for some.</li>
+                    <li><span class="color-box unhealthy"></span> <strong>151-200 (Unhealthy):</strong> Health effects for all.</li>
+                    <li><span class="color-box very-unhealthy"></span> <strong>201-300 (Very Unhealthy):</strong> Health alert.</li>
+                    <li><span class="color-box hazardous"></span> <strong>301+ (Hazardous):</strong> Health warning.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Precautionary / Safety Section -->
+        <section class="safety-section card fade-in hover-lift" style="animation-delay: 0.4s;">
+            <h2><i class="fa-solid fa-shield-halved text-primary"></i> Health & Safety Measures</h2>
+            <div class="grid-2">
+                <div class="dos card-inner">
+                    <h3 class="text-green"><i class="fa-solid fa-circle-check"></i> Do's</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-leaf"></i> Keep indoor plants that purify air (e.g. Snake Plant).</li>
+                        <li><i class="fa-solid fa-mask-face"></i> Use N95/N99 masks when outside in high AQI.</li>
+                        <li><i class="fa-solid fa-fan"></i> Use HEPA air purifiers indoors if possible.</li>
+                        <li><i class="fa-solid fa-glass-water"></i> Stay hydrated to help your body naturally flush toxins.</li>
+                    </ul>
+                </div>
+                <div class="donts card-inner">
+                    <h3 class="text-red"><i class="fa-solid fa-circle-xmark"></i> Don'ts</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-person-running"></i> Avoid outdoor exercises during high pollution times.</li>
+                        <li><i class="fa-solid fa-house-chimney-window"></i> Don't keep windows open when outdoor AQI is poor.</li>
+                        <li><i class="fa-solid fa-car"></i> Avoid walking/exercising near high-traffic areas.</li>
+                        <li><i class="fa-solid fa-fire"></i> Prohibit burning wood, trash, or leaves outdoors.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>AQI Data securely fetched from <strong>Open-Meteo Air Quality API</strong></p>
+        </footer>
+    </div>
+    
+    <!-- Link to custom Javascript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
